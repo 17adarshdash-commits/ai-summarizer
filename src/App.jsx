@@ -32,40 +32,42 @@ function App() {
   };
 
   return (
-    <div style={{ maxWidth: 600, margin: "40px auto", fontFamily: "sans-serif" }}>
-      <h1>Text Summarizer</h1>
+    <div className="max-w-2xl mx-auto my-10 px-4 font-sans">
+      <div className="bg-white shadow rounded-lg p-6">
+      <h1 className="text-2xl font-bold mb-4">Text Summarizer</h1>
 
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Paste your text here..."
         rows={10}
-        style={{ width: "100%", padding: 10, boxSizing: "border-box" }}
+        className="w-full box-border rounded-md border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
 
       <button
         onClick={handleSubmit}
         disabled={loading || !text.trim()}
-        style={{ marginTop: 10, padding: "8px 16px" }}
+        className="mt-3 rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {loading ? "Summarizing..." : "Submit"}
       </button>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p className="mt-3 text-red-600">{error}</p>}
 
       {result && (
-        <div style={{ marginTop: 20 }}>
-          <h2>Summary</h2>
+        <div className="mt-5">
+          <h2 className="text-xl font-semibold mb-2">Summary</h2>
           <p>{result.summary}</p>
 
-          <h2>Key Points</h2>
-          <ul>
+          <h2 className="text-xl font-semibold mt-4 mb-2">Key Points</h2>
+          <ul className="list-disc pl-6">
             {result.key_points.map((point, i) => (
               <li key={i}>{point}</li>
             ))}
           </ul>
         </div>
       )}
+      </div>
     </div>
   );
 }
