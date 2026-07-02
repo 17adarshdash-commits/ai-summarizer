@@ -19,7 +19,13 @@ function App() {
       });
 
       if (!response.ok) {
-        throw new Error("Request failed");
+        const errData = await response.json();
+        if (response.status === 400) {
+          setError("Please paste a longer text to summarize.");
+        } else {
+          setError(errData.error || "Something went wrong. Please try again.");
+        }
+        return;
       }
 
       const data = await response.json();
